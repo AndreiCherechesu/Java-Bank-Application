@@ -8,13 +8,16 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.luxoft.bankapp.exceptions.BankException;
 import com.luxoft.bankapp.exceptions.ClientExistsException;
+import com.luxoft.bankapp.service.EmailService;
 import com.luxoft.bankapp.utils.ClientRegistrationListener;
 
 public class Bank {
 	
 	private final Set<Client> clients = new LinkedHashSet<Client>();
 	private final List<ClientRegistrationListener> listeners = new ArrayList<ClientRegistrationListener>();
+	private final EmailService emailService = new EmailService();
 	
 	private int printedClients = 0;
 	private int emailedClients = 0;
@@ -56,7 +59,11 @@ public class Bank {
 	public Set<Client> getClients() {
 		return Collections.unmodifiableSet(clients);
 	}
-	
+
+	public void closeEmailService() {
+		emailService.close();
+	}
+
 	class PrintClientListener implements ClientRegistrationListener {
 		@Override 
 		public void onClientAdded(Client client) {
@@ -69,9 +76,16 @@ public class Bank {
 	class EmailNotificationListener implements ClientRegistrationListener {
 		@Override 
 		public void onClientAdded(Client client) {
-	        System.out.println("Notification email for client " + client.getName() + " to be sent");
-	        emailedClients++;
-	    }
+			System.out.println("Notification email for client " + client.getName() + " to be sent");
+			Email email = new Email(client, List.of(client), "Salut", "Ce faci?");
+
+			try {
+				emailService.sendNotificationEmail(email);
+			} catch (BankException e) {
+				e.printStackTrace();
+			}
+			emailedClients++;
+		}
 	}
 	
 	class DebugListener implements ClientRegistrationListener {

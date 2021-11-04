@@ -25,6 +25,8 @@ public class BankApplication {
 		if (args.length > 0 && args[0].equals("-statistics")) {
 			printStatistics(bank);
 		}
+
+		bank.closeEmailService();
 	}
 	
 	private static void modifyBank() {
