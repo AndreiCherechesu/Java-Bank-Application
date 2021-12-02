@@ -52,4 +52,9 @@ public class BankReportStreams {
     public Map<String, List<Client>> getClientsByCity(Bank bank) {
         return new TreeMap<>(bank.getClients().stream().collect(Collectors.groupingBy(Client::getCity)));
     }
+
+    public Map<String, List<Client>> getClientsByBirthdayMonth(Bank bank) {
+        return new TreeMap<>(bank.getClients().stream().collect(Collectors.groupingBy(
+                client -> client.getBirthday().getMonth().name())));
+    }
 }

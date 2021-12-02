@@ -8,6 +8,7 @@ import com.luxoft.bankapp.service.EmailService;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -19,8 +20,8 @@ public class TestEmailService {
 
     @Before
     public void setup() {
-        client = new Client("Andrew", Gender.MALE, "Manchester");
-        to = new Client("Brian", Gender.MALE, "Birmingham");
+        client = new Client("Andrew", Gender.MALE, "Manchester", LocalDate.of(1997, 3, 1));
+        to = new Client("Brian", Gender.MALE, "Birmingham", LocalDate.of(1997, 3, 1));
     }
 
     @Test

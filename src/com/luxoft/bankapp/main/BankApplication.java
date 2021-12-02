@@ -12,6 +12,8 @@ import com.luxoft.bankapp.exceptions.OverdraftLimitExceededException;
 import com.luxoft.bankapp.service.BankReport;
 import com.luxoft.bankapp.service.BankService;
 
+import java.time.LocalDate;
+
 public class BankApplication {
 	
 	private static Bank bank;
@@ -30,7 +32,7 @@ public class BankApplication {
 	}
 	
 	private static void modifyBank() {
-		Client client1 = new Client("John", Gender.MALE, "Toronto");
+		Client client1 = new Client("John", Gender.MALE, "Toronto", LocalDate.of(1997, 3, 1));
 		Account account1 = new SavingAccount(1, 100);
 		Account account2 = new CheckingAccount(2, 100, 20);
 		client1.addAccount(account1);

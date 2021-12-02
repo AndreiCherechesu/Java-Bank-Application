@@ -6,6 +6,7 @@ import com.luxoft.bankapp.service.BankReportStreams;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -22,20 +23,20 @@ public class TestStreams {
 
     @Before
     public void initialize() throws ClientExistsException {
-        client1 = new Client("Andrei", Gender.MALE, "Bucharest");
+        client1 = new Client("Andrei", Gender.MALE, "Bucharest", LocalDate.of(1997, 3, 1));
         Account account1 = new SavingAccount(1, 100);
         Account account2 = new CheckingAccount(2, 100, 20);
         client1.addAccount(account1);
         client1.addAccount(account2);
 
-        client2 = new Client("Ionut", Gender.MALE, "Targoviste");
+        client2 = new Client("Ionut", Gender.MALE, "Targoviste", LocalDate.of(1997, 3, 1));
         Account account3 = new SavingAccount(3, 330);
         Account account4 = new CheckingAccount(4, 200, 20);
         account4.deposit(1000);
         client2.addAccount(account3);
         client2.addAccount(account4);
 
-        client3 = new Client("Mihaela", Gender.FEMALE, "Focsani");
+        client3 = new Client("Mihaela", Gender.FEMALE, "Focsani", LocalDate.of(1997, 3, 1));
         Account account5 = new SavingAccount(5, 370);
         Account account6 = new CheckingAccount(6, 600, 80);
         client3.addAccount(account5);
